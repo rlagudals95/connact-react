@@ -23,7 +23,7 @@ export function createStorage<D>(
   let listeners: Array<() => void> = [];
   const storageType = config?.storageType ?? StorageType.Local;
 
-  const _getDataFromStorage = async (): Promise<D> => {
+  const getDataFromStorage = async (): Promise<D> => {
     if (chrome.storage[storageType] === undefined) {
       throw new Error(
         `Check your storage permission into manifest.json: ${storageType} is not defined`
@@ -33,7 +33,7 @@ export function createStorage<D>(
     return value[key] ?? fallback;
   };
 
-  const _emitChange = () => {
+  const emitChange = () => {
     listeners.forEach((listener) => listener());
   };
 
@@ -53,7 +53,7 @@ export function createStorage<D>(
       cache = valueOrUpdate;
     }
     await chrome.storage[storageType].set({ [key]: cache });
-    _emitChange();
+    emitChange();
   };
 
   const subscribe = (listener: () => void) => {
@@ -67,13 +67,13 @@ export function createStorage<D>(
     return cache;
   };
 
-  _getDataFromStorage().then((data) => {
+  getDataFromStorage().then((data) => {
     cache = data;
-    _emitChange();
+    emitChange();
   });
 
   return {
-    get: _getDataFromStorage,
+    get: getDataFromStorage,
     set,
     getSnapshot,
     subscribe,

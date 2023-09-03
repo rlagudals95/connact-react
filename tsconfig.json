@@ -8,9 +8,10 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "jsxImportSource": "@emotion/react",
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", "@emotion/react/types/css-prop"],
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -25,5 +26,6 @@
       "virtual:reload-on-update-in-view": ["./src/global.d.ts"]
     }
   },
-  "include": ["src", "utils", "vite.config.ts", "node_modules/@types"]
+  "include": ["src", "utils", "vite.config.ts", "node_modules/@types"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

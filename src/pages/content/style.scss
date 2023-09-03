@@ -5,3 +5,16 @@
 .content-view-style-may-be-not-working {
   font-size: 30px;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+.content-root-app {
+  position: fixed;
+  right: 50px;
+  top: 50px;
+  background: purple;
+}
